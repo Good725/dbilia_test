@@ -3,6 +3,37 @@
  */
 
 require("@nomiclabs/hardhat-truffle5");
+require("@nomiclabs/hardhat-etherscan");
+require("dotenv").config();
+
 module.exports = {
-  solidity: "0.8.0",
+  defaultNetwork: "hardhat",
+  networks: {
+    hardhat: {
+      forking: {
+        url: "https://mainnet.infura.io/v3/" + process.env.INFURA_KEY,
+      }
+    },
+    rinkeby: {
+      url: "https://mainnet.infura.io/v3/" + process.env.INFURA_KEY,
+      accounts: {
+        mnemonic: process.env.MNEMONIC,
+      }
+    }
+  },
+  solidity: {
+    version: "0.8.0",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200
+      }
+    }
+  },
+  mocha: {
+    timeout: 999999
+  },
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_KEY
+  }
 };

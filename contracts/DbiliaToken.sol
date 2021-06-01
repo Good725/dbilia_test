@@ -41,7 +41,7 @@ contract DbiliaToken is ERC721 {
         require(cards[cardId].user == address(0x0), "CardId is already exist");
         require(user != address(0x0), "can not mint to zero address");
         uint256 newTokenId = _getNextTokenId();
-        _mint(dbilia, newTokenId);
+        _mint(user, newTokenId);
         _incrementTokenId();
         uriMap[newTokenId] = tokenUri;
         editionPerCard[cardId] = edition;
